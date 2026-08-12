@@ -33,7 +33,7 @@ export default async function HomePage() {
               Premium Anti-Slip Mat Manufacturing for Global Buyers
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground">
-              JIAJIELI manufactures PVC and TPE bath mats, floor mats, door mats, and custom OEM/ODM mat programs from a 50,000+ m2 Yiwu production base.
+              JIAJIELI manufactures PVC and TPE bath mats, floor mats, door mats, and custom OEM/ODM mat programs from a 50,000+ sqm Yiwu production base.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className="rounded-full">

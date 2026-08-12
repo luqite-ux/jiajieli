@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: 'JIAJIELI | Premium Anti-Slip Mat Manufacturer',
   description:
     'Zhejiang Jiajie Plastic Co., Ltd. manufactures PVC and TPE anti-slip bath mats, floor mats, door mats, and custom OEM/ODM mat solutions for global B2B buyers.',
-  metadataBase: new URL('https://www.jiajieli.com'),
+  metadataBase: new URL('https://jiajieli.vercel.app'),
   openGraph: {
     title: 'JIAJIELI | Premium Anti-Slip Mat Manufacturer',
     description:

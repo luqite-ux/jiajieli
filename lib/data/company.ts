@@ -38,7 +38,7 @@ export const company = {
 
 export const proofStats = [
   { value: 26, suffix: '', label: 'Years of Manufacturing' },
-  { value: 50000, suffix: '+', label: 'm² Factory' },
+  { value: 50000, suffix: '+', label: 'sqm Factory' },
   { value: 30, suffix: '', label: 'Production Lines' },
   { value: 8000, suffix: '', label: 'Tons Annual Output' },
   { value: 65, suffix: '%+', label: 'Export Share' },

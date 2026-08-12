@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { SectionShell } from '@/components/section-shell'
 import { newsPosts } from '@/lib/data/news'
@@ -9,6 +10,27 @@ export const dynamicParams = true
 
 export function generateStaticParams() {
   return newsPosts.map((post) => ({ slug: post.slug }))
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const post = await fetchArticleBySlug(slug)
+  if (!post) {
+    return { title: 'News Not Found | JIAJIELI' }
+  }
+
+  return {
+    title: `${post.title} | JIAJIELI`,
+    description: post.excerpt,
+    alternates: { canonical: `/news/${post.slug}` },
+    openGraph: {
+      title: `${post.title} | JIAJIELI`,
+      description: post.excerpt,
+      type: 'article',
+      url: `/news/${post.slug}`,
+      images: [post.image],
+    },
+  }
 }
 
 export default async function NewsDetailPage({ params }: { params: Promise<{ slug: string }> }) {

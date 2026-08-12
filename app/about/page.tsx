@@ -12,7 +12,7 @@ export default function AboutPage() {
           <div className="grid gap-4 sm:grid-cols-2">
             {[
               ['26 years', 'Manufacturing experience'],
-              ['50,000+ m2', 'Factory area'],
+              ['50,000+ sqm', 'Factory area'],
               ['30', 'Advanced production lines'],
               ['8,000 tons', 'Annual output'],
               ['65%+', 'Export share'],
