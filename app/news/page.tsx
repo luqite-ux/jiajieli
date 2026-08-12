@@ -1,9 +1,18 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import type { Metadata } from 'next'
 import { SectionShell } from '@/components/section-shell'
 import { fetchPublishedArticles } from '@/lib/articles-db'
+import { canonicalPath } from '@/lib/seo'
 
 export const revalidate = 60
+
+export const metadata: Metadata = {
+  title: 'News | JIAJIELI Company Updates',
+  description:
+    'Read JIAJIELI company updates, export sourcing notes, compliance references, and manufacturing news for PVC and TPE mat buyers.',
+  alternates: { canonical: canonicalPath('/news') },
+}
 
 export default async function NewsPage() {
   const newsPosts = await fetchPublishedArticles()

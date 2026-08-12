@@ -1,6 +1,15 @@
 import { SectionShell } from '@/components/section-shell'
 import { certificateImages, company } from '@/lib/data/company'
 import Image from 'next/image'
+import type { Metadata } from 'next'
+import { canonicalPath } from '@/lib/seo'
+
+export const metadata: Metadata = {
+  title: 'Quality Control | JIAJIELI Export Mat Inspection',
+  description:
+    'Review JIAJIELI material checks, in-process inspection, pre-shipment review, and compliance references for export mat sourcing.',
+  alternates: { canonical: canonicalPath('/quality-control') },
+}
 
 export default function QualityControlPage() {
   return (

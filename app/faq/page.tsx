@@ -1,5 +1,14 @@
+import type { Metadata } from 'next'
 import { SectionShell } from '@/components/section-shell'
 import { faqItems } from '@/lib/data/faq'
+import { canonicalPath } from '@/lib/seo'
+
+export const metadata: Metadata = {
+  title: 'FAQ | JIAJIELI B2B Sourcing Questions',
+  description:
+    'Answers to common JIAJIELI sourcing questions about lead time, OEM/ODM customization, materials, capacity, export markets, and sample requests.',
+  alternates: { canonical: canonicalPath('/faq') },
+}
 
 export default function FaqPage() {
   return (

@@ -1,6 +1,15 @@
 import Image from 'next/image'
+import type { Metadata } from 'next'
 import { SectionShell } from '@/components/section-shell'
 import { company, certificateImages } from '@/lib/data/company'
+import { canonicalPath } from '@/lib/seo'
+
+export const metadata: Metadata = {
+  title: 'About JIAJIELI | Zhejiang Jiajie Plastic Co., Ltd.',
+  description:
+    'Learn about JIAJIELI, a Yiwu-based manufacturer of PVC and TPE anti-slip mats with 30 production lines and export-focused OEM/ODM support.',
+  alternates: { canonical: canonicalPath('/about') },
+}
 
 export default function AboutPage() {
   return (

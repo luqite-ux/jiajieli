@@ -1,10 +1,19 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import type { Metadata } from 'next'
 import { SectionShell } from '@/components/section-shell'
 import { Button } from '@/components/ui/button'
 import { fetchProductCategories, fetchProducts } from '@/lib/products-db'
+import { canonicalPath } from '@/lib/seo'
 
 export const revalidate = 60
+
+export const metadata: Metadata = {
+  title: 'Products | JIAJIELI Anti-Slip Mats',
+  description:
+    'Browse JIAJIELI PVC and TPE bath mats, floor mats, door mats, massage mats, cartoon bath mats, and automotive accessories for B2B sourcing.',
+  alternates: { canonical: canonicalPath('/products') },
+}
 
 export default async function ProductsPage({
   searchParams,

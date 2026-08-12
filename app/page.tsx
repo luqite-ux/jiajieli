@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import type { Metadata } from 'next'
 import { ArrowRight, Factory, Layers3, ShieldCheck, Sparkles } from 'lucide-react'
 import { SectionShell } from '@/components/section-shell'
 import { Button } from '@/components/ui/button'
@@ -9,8 +10,16 @@ import { InquiryForm } from '@/components/inquiry-form'
 import { applicationMarkets, company, proofStats } from '@/lib/data/company'
 import { fetchPublishedArticles } from '@/lib/articles-db'
 import { fetchProductCategories, fetchProducts } from '@/lib/products-db'
+import { canonicalPath } from '@/lib/seo'
 
 export const revalidate = 60
+
+export const metadata: Metadata = {
+  title: 'JIAJIELI | Premium Anti-Slip Mat Manufacturer',
+  description:
+    'Zhejiang Jiajie Plastic Co., Ltd. manufactures PVC and TPE bath mats, floor mats, door mats, and OEM/ODM mat programs for global B2B buyers.',
+  alternates: { canonical: canonicalPath('/') },
+}
 
 export default async function HomePage() {
   const [categories, products, newsPosts] = await Promise.all([

@@ -1,7 +1,16 @@
 import { Mail, MapPin } from 'lucide-react'
+import type { Metadata } from 'next'
 import { SectionShell } from '@/components/section-shell'
 import { InquiryForm } from '@/components/inquiry-form'
 import { company } from '@/lib/data/company'
+import { canonicalPath } from '@/lib/seo'
+
+export const metadata: Metadata = {
+  title: 'Contact JIAJIELI | Send a B2B Inquiry',
+  description:
+    'Contact JIAJIELI to discuss PVC and TPE mat sourcing, OEM/ODM customization, target quantity, samples, and export documentation needs.',
+  alternates: { canonical: canonicalPath('/contact') },
+}
 
 export default function ContactPage() {
   return (

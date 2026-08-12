@@ -1,6 +1,15 @@
 import Image from 'next/image'
+import type { Metadata } from 'next'
 import { SectionShell } from '@/components/section-shell'
 import { company } from '@/lib/data/company'
+import { canonicalPath } from '@/lib/seo'
+
+export const metadata: Metadata = {
+  title: 'Manufacturing | JIAJIELI Production Base',
+  description:
+    'See how JIAJIELI supports custom B2B mat programs with 30 production lines, sampling checkpoints, and repeat-order manufacturing capacity.',
+  alternates: { canonical: canonicalPath('/manufacturing') },
+}
 
 export default function ManufacturingPage() {
   return (
