@@ -7,10 +7,18 @@ import { Reveal } from '@/components/reveal'
 import { StatCounter } from '@/components/stat-counter'
 import { InquiryForm } from '@/components/inquiry-form'
 import { applicationMarkets, company, proofStats } from '@/lib/data/company'
-import { categories, products } from '@/lib/data/products'
-import { newsPosts } from '@/lib/data/news'
+import { fetchPublishedArticles } from '@/lib/articles-db'
+import { fetchProductCategories, fetchProducts } from '@/lib/products-db'
 
-export default function HomePage() {
+export const revalidate = 60
+
+export default async function HomePage() {
+  const [categories, products, newsPosts] = await Promise.all([
+    fetchProductCategories(),
+    fetchProducts(),
+    fetchPublishedArticles(),
+  ])
+
   return (
     <>
       <section className="relative overflow-hidden bg-[radial-gradient(circle_at_20%_20%,rgba(126,190,199,.32),transparent_28%),linear-gradient(135deg,#f8fcfb_0%,#eaf6f7_45%,#fff7ed_100%)]">

@@ -2,9 +2,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { SectionShell } from '@/components/section-shell'
 import { Button } from '@/components/ui/button'
-import { categories, products, getCategoryBySlug } from '@/lib/data/products'
+import { fetchProductCategories, fetchProducts } from '@/lib/products-db'
 
-export default function ProductsPage() {
+export const revalidate = 60
+
+export default async function ProductsPage() {
+  const [categories, products] = await Promise.all([fetchProductCategories(), fetchProducts()])
+
   return (
     <>
       <SectionShell className="bg-gradient-to-br from-[#eef9fa] via-white to-[#fff7ed]" eyebrow="Products" title="PVC and TPE mat programs for B2B sourcing." description="Browse launch products and send an inquiry for materials, custom colors, dimensions, packaging, and export documentation needs." />
@@ -22,7 +26,7 @@ export default function ProductsPage() {
       <SectionShell className="bg-secondary/45" title="Launch Products">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {products.map((product) => {
-            const category = getCategoryBySlug(product.categorySlug)
+            const category = categories.find((item) => item.slug === product.categorySlug)
             return (
               <article key={product.slug} className="rounded-2xl border border-border bg-card p-4">
                 <Image src={product.image} alt={product.name} width={420} height={320} className="aspect-square rounded-xl object-cover" />

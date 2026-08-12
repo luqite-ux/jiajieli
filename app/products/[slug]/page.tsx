@@ -2,16 +2,21 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { SectionShell } from '@/components/section-shell'
 import { InquiryForm } from '@/components/inquiry-form'
-import { getCategoryBySlug, getProductBySlug, products } from '@/lib/data/products'
+import { products } from '@/lib/data/products'
+import { fetchProductBySlug, fetchProductCategories } from '@/lib/products-db'
+
+export const revalidate = 60
+export const dynamicParams = true
 
 export function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }))
 }
 
-export default function ProductDetailPage({ params }: { params: { slug: string } }) {
-  const product = getProductBySlug(params.slug)
+export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const [product, categories] = await Promise.all([fetchProductBySlug(slug), fetchProductCategories()])
   if (!product) notFound()
-  const category = getCategoryBySlug(product.categorySlug)
+  const category = categories.find((item) => item.slug === product.categorySlug)
 
   return (
     <>
@@ -30,7 +35,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
             </dl>
             <h3 className="mt-6 font-heading text-xl font-semibold">Key Features</h3>
             <ul className="mt-3 grid gap-2 text-sm text-muted-foreground">
-              {product.features.map((feature) => <li key={feature}>• {feature}</li>)}
+              {product.features.map((feature) => <li key={feature}>- {feature}</li>)}
             </ul>
           </div>
         </div>

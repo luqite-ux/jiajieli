@@ -1,10 +1,11 @@
 import type { MetadataRoute } from 'next'
-import { products } from '@/lib/data/products'
-import { newsPosts } from '@/lib/data/news'
+import { fetchPublishedArticles } from '@/lib/articles-db'
+import { fetchProducts } from '@/lib/products-db'
 
-const baseUrl = 'https://www.jiajieli.com'
+const baseUrl = 'https://jiajieli.vercel.app'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [products, newsPosts] = await Promise.all([fetchProducts(), fetchPublishedArticles()])
   const staticPages = ['', '/about', '/products', '/manufacturing', '/quality-control', '/faq', '/news', '/contact']
   return [
     ...staticPages.map((path) => ({ url: `${baseUrl}${path}`, lastModified: new Date() })),
