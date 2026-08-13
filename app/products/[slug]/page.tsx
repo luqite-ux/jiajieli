@@ -46,7 +46,13 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         <div className="grid gap-8 lg:grid-cols-[.95fr_1.05fr]">
           <Image src={product.image} alt={product.name} width={800} height={700} className="aspect-square rounded-2xl object-cover shadow-lg" />
           <div className="rounded-2xl border border-border bg-card p-6">
-            <h2 className="font-heading text-2xl font-semibold">Specifications</h2>
+            {product.longDescription ? (
+              <>
+                <h2 className="font-heading text-2xl font-semibold">Product Description</h2>
+                <p className="mt-4 text-sm leading-7 text-muted-foreground">{product.longDescription}</p>
+              </>
+            ) : null}
+            <h2 className={`${product.longDescription ? 'mt-7' : ''} font-heading text-2xl font-semibold`}>Specifications</h2>
             <dl className="mt-5 divide-y divide-border">
               {product.specs.map((spec) => (
                 <div key={spec.label} className="grid gap-2 py-3 sm:grid-cols-[160px_1fr]">

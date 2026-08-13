@@ -94,9 +94,15 @@ export default async function ProductsPage({
             return (
               <article key={product.slug} className="flex rounded-2xl border border-border bg-card p-4 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
                 <div className="flex w-full flex-col">
-                  <Image src={product.image} alt={product.name} width={420} height={320} className="aspect-square rounded-xl object-cover" />
+                  <Link href={`/products/${product.slug}`} aria-label={`View details for ${product.name}`}>
+                    <Image src={product.image} alt={product.name} width={420} height={320} className="aspect-square rounded-xl object-cover transition hover:opacity-90" />
+                  </Link>
                   <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-accent">{category?.name}</p>
-                  <h3 className="mt-2 font-heading text-lg font-semibold leading-snug text-foreground">{product.name}</h3>
+                  <h3 className="mt-2 font-heading text-lg font-semibold leading-snug text-foreground">
+                    <Link href={`/products/${product.slug}`} className="hover:text-primary">
+                      {product.name}
+                    </Link>
+                  </h3>
                   <p className="mt-2 text-sm text-muted-foreground">{product.material}</p>
                   <Button asChild className="mt-auto w-full rounded-full">
                     <Link href={`/products/${product.slug}`}>

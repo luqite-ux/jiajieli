@@ -82,6 +82,7 @@ export async function fetchProducts(): Promise<Product[]> {
         features: pick(product.features_i18n, fallback?.features ?? []),
         specs: specs.length ? specs : fallback?.specs ?? [],
         summary: pick(product.overview_i18n, pick(product.description_i18n, fallback?.summary ?? '')),
+        longDescription: pick(product.description_i18n, fallback?.longDescription ?? fallback?.summary ?? ''),
       }
     })
   } catch {
