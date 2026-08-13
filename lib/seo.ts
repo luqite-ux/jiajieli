@@ -1,4 +1,4 @@
-export const siteUrl = 'https://jiajieli.vercel.app'
+export const siteUrl = 'https://jiajiebathmat.com'
 
 export function canonicalPath(path = '/') {
   return path
