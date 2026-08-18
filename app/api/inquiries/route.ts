@@ -1,6 +1,27 @@
 import { NextResponse } from 'next/server'
 import { createPublicSupabaseClient, getTenantId } from '@/lib/supabase'
 
+async function notifyInquiryEmail(tenantId: string, inquiryId: string) {
+  const secret = process.env.INQUIRY_NOTIFY_SECRET?.trim()
+  const adminUrl = (process.env.HUANQIU_ADMIN_URL ?? process.env.NEXT_PUBLIC_ADMIN_URL)?.trim().replace(/\/$/, '')
+  if (!secret || !adminUrl) return
+
+  try {
+    const response = await fetch(`${adminUrl}/api/inquiries/notify`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-inquiry-notify-secret': secret,
+      },
+      body: JSON.stringify({ tenantId, inquiryId }),
+    })
+    if (!response.ok) {
+      console.warn('[inquiries] notification request failed', response.status)
+    }
+  } catch (error) {
+    console.warn('[inquiries] notification request error', error)
+  }
+}
 export async function POST(request: Request) {
   const form = await request.formData()
   const payload = {
@@ -25,7 +46,8 @@ export async function POST(request: Request) {
   }
 
   const supabase = createPublicSupabaseClient()
-  const { error } = await supabase.from('inquiries').insert(payload)
+  const { data, error } = await supabase.from('inquiries').insert(payload).select('id').single()
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
+  if (data?.id) await notifyInquiryEmail(payload.tenant_id, data.id)
   return NextResponse.json({ ok: true })
 }
