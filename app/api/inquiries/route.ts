@@ -46,8 +46,9 @@ export async function POST(request: Request) {
   }
 
   const supabase = createPublicSupabaseClient()
-  const { data, error } = await supabase.from('inquiries').insert(payload).select('id').single()
+  const inquiryId = crypto.randomUUID()
+  const { error } = await supabase.from('inquiries').insert({ id: inquiryId, ...payload })
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
-  if (data?.id) await notifyInquiryEmail(payload.tenant_id, data.id)
+  await notifyInquiryEmail(payload.tenant_id, inquiryId)
   return NextResponse.json({ ok: true })
 }
