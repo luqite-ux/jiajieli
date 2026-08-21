@@ -53,3 +53,16 @@ Product detail, image, content, database, and production verification results wi
 - Unique R2 uploads: 1,023, including six stable factory-role objects.
 - Public verification: all six factory URLs plus representative first/middle/last product URLs returned HTTP 200 with `image/webp` content type and matching content length.
 - Physical asset namespace: `tenants/jiajieli/catalog/shared/` and `tenants/jiajieli/factory/`; no other tenant namespace was written.
+
+### Catalog import
+
+- Conservative business merge rule: same primary image hash, same title-derived material, and same title-derived size.
+- Source listings: 342.
+- Active imported products: 298.
+- Merged source links retained in provenance: 44 across 36 consolidated products.
+- Active buyer-facing categories: 7.
+- Old demo products deactivated: 8, limited to the exact tenant and known `delivery_key` values.
+- Old launch categories deactivated: 7, limited to the exact tenant and known legacy slugs.
+- Database readback: 298 active products and 7 active categories; every row belongs to tenant `a1471a06-d1a8-4fe8-a12d-59cc6fe2b12b`.
+- Tenant readback: `admin_group=2`, `default_language=en`, `supported_languages=[en]`.
+- Products with no material explicitly present in the public title: 25; material remains unset instead of being inferred.
