@@ -91,7 +91,7 @@ export default function QualityControlPage() {
         <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           <div>
             <p className="max-w-xl text-sm leading-7 text-muted-foreground">
-              Buyer programs can align order inspection and documentation with common references listed by JIAJIELI's
+              Buyer programs can align order inspection and documentation with common references listed by JIAJIELI&apos;s
               domestic site. Final testing scope, samples, materials, and labeling requirements should be confirmed per
               purchase order.
             </p>
