@@ -74,3 +74,12 @@ Product detail, image, content, database, and production verification results wi
 - Demo product fallback removed; a query failure can no longer silently republish unverified launch content.
 - Locale resolution implemented as requested locale → default locale → first nonempty locale → explicit fallback.
 - Local production build passed with temporary environment injection from the approved local env source; no secrets were written to the worktree.
+
+### Product discovery and detail UI
+
+- Product catalog filters: keyword, category, and material, all represented in shareable URL query parameters.
+- Pagination: 24 products per page; page values clamp to the available result range.
+- Product detail: responsive primary/gallery images, specifications, documented features, applications, related products, breadcrumb, Product JSON-LD, and product-specific inquiry context.
+- Inquiry payload now carries product slug and product name; the nonfunctional attachment placeholder and unverified response-time statement were removed.
+- Client serialization is limited to the selected product gallery; the 298-product catalog stays in the Server Component/data layer.
+- External product text in JSON-LD is escaped before script embedding.

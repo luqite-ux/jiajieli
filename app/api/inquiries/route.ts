@@ -24,17 +24,22 @@ async function notifyInquiryEmail(tenantId: string, inquiryId: string) {
 }
 export async function POST(request: Request) {
   const form = await request.formData()
+  const productSlug = String(form.get('productSlug') || '')
+  const productName = String(form.get('productName') || '')
+  const productInterest = String(form.get('productInterest') || 'General')
   const payload = {
     tenant_id: getTenantId(),
     name: String(form.get('name') || ''),
     company: String(form.get('company') || ''),
     email: String(form.get('email') || ''),
     phone: String(form.get('phone') || ''),
-    subject: `JIAJIELI Inquiry - ${String(form.get('productInterest') || 'General')}`,
+    subject: `JIAJIELI Inquiry - ${productName || productInterest}`,
     message: [
       String(form.get('message') || ''),
       `Country / Region: ${String(form.get('country') || '')}`,
-      `Product Interest: ${String(form.get('productInterest') || '')}`,
+      `Product Interest: ${productInterest}`,
+      `Product Name: ${productName}`,
+      `Product Slug: ${productSlug}`,
       `Estimated Quantity: ${String(form.get('estimatedQuantity') || '')}`,
       `Customization: ${String(form.get('customization') || '')}`,
     ].join('\n'),

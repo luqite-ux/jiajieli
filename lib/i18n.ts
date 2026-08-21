@@ -11,8 +11,9 @@ export function pickLocalized<T>(
   defaultLocale: string,
   fallback: T,
 ): T {
-  if (hasValue(values?.[requestedLocale])) return values[requestedLocale]
-  if (hasValue(values?.[defaultLocale])) return values[defaultLocale]
-  const first = Object.values(values ?? {}).find(hasValue)
+  const source = values ?? {}
+  if (hasValue(source[requestedLocale])) return source[requestedLocale]
+  if (hasValue(source[defaultLocale])) return source[defaultLocale]
+  const first = Object.values(source).find(hasValue)
   return first ?? fallback
 }

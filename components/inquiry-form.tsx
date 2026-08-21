@@ -1,7 +1,7 @@
 'use client'
 
 import { useId, useState } from 'react'
-import { CheckCircle2, Loader2, UploadCloud } from 'lucide-react'
+import { CheckCircle2, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { categories, products } from '@/lib/data/products'
+import { categories as defaultCategories, type ProductCategory } from '@/lib/data/products'
 
 const countries = [
   'United States',
@@ -49,9 +49,13 @@ const quantityRanges = [
 
 export function InquiryForm({
   defaultProduct,
+  productName,
+  categories = defaultCategories,
   compact = false,
 }: {
   defaultProduct?: string
+  productName?: string
+  categories?: ProductCategory[]
   compact?: boolean
 }) {
   const formId = useId()
@@ -76,8 +80,8 @@ export function InquiryForm({
         <div>
           <h3 className="font-heading text-xl font-semibold text-foreground">Inquiry received</h3>
           <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
-            Thank you for reaching out to JIAJIELI. Our export team typically responds within 1-2
-            business days with product guidance tailored to your order.
+            Thank you for reaching out to JIAJIELI. Our export team will review the product and
+            sourcing details provided with your request.
           </p>
         </div>
         <Button variant="outline" className="mt-2 rounded-full" onClick={() => setStatus('idle')}>
@@ -88,7 +92,9 @@ export function InquiryForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="rounded-2xl border border-border bg-card p-6 sm:p-8">
+    <form onSubmit={handleSubmit} className={`rounded-2xl border border-border bg-card p-6 ${compact ? '' : 'sm:p-8'}`}>
+      {defaultProduct ? <input type="hidden" name="productSlug" value={defaultProduct} /> : null}
+      {productName ? <input type="hidden" name="productName" value={productName} /> : null}
       <FieldGroup>
         <div className="grid gap-5 sm:grid-cols-2">
           <Field>
@@ -148,6 +154,7 @@ export function InquiryForm({
                 <SelectValue placeholder="Select a product or category" />
               </SelectTrigger>
               <SelectContent>
+                {defaultProduct && productName ? <SelectItem value={defaultProduct}>{productName}</SelectItem> : null}
                 {categories.map((category) => (
                   <SelectItem key={category.slug} value={category.slug}>
                     {category.name}
@@ -195,17 +202,6 @@ export function InquiryForm({
           />
         </Field>
 
-        {!compact && (
-          <Field>
-            <FieldLabel>Reference Files (optional)</FieldLabel>
-            <div className="flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-border bg-muted/50 px-6 py-8 text-center transition-colors hover:border-primary/40 hover:bg-muted">
-              <UploadCloud className="size-6 text-muted-foreground" aria-hidden="true" />
-              <p className="text-sm font-medium text-foreground">Drop files or click to attach</p>
-              <FieldDescription>Product references, spec sheets, or artwork (max 10MB)</FieldDescription>
-            </div>
-          </Field>
-        )}
-
         <Button type="submit" size="lg" className="rounded-full" disabled={status === 'submitting'}>
           {status === 'submitting' ? (
             <>
@@ -225,7 +221,3 @@ export function InquiryForm({
   )
 }
 
-// Referenced for the product-detail page prefill so linters keep the import
-// tree honest even if a page passes a raw slug.
-export type { }
-void products
