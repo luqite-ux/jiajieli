@@ -41,3 +41,15 @@
 - The capture manifest excludes price/MOQ as publishable product specifications because those values are time-sensitive commercial terms.
 
 Product detail, image, content, database, and production verification results will be appended as each implementation task completes.
+
+### Image processing and R2
+
+- Product image references selected after URL normalization: 1,704 across 342 source listings, with at most five per listing.
+- Factory images processed: 6 of 6.
+- Output format: WebP, sRGB, EXIF orientation corrected, maximum 1600×1600 without enlargement.
+- Invalid local outputs: 0.
+- Total local processed size: 145,111,060 bytes before hash deduplication.
+- Unique product output hashes: 1,017; duplicate physical product images avoided: 687.
+- Unique R2 uploads: 1,023, including six stable factory-role objects.
+- Public verification: all six factory URLs plus representative first/middle/last product URLs returned HTTP 200 with `image/webp` content type and matching content length.
+- Physical asset namespace: `tenants/jiajieli/catalog/shared/` and `tenants/jiajieli/factory/`; no other tenant namespace was written.

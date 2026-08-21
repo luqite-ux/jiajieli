@@ -1,0 +1,32 @@
+[
+  {
+    "sourceFileName": "64f77d4e-afd3-4a27-a4a4-4c6f8fa0e3f4.jpg",
+    "role": "factory-exterior-wide",
+    "alt": "Exterior of the Zhejiang Jiajie Plastic production building"
+  },
+  {
+    "sourceFileName": "f0000ff3-7454-48a5-95dd-fdb48d94b60a.jpg",
+    "role": "factory-exterior-detail",
+    "alt": "Detailed exterior view of the Zhejiang Jiajie Plastic factory entrance"
+  },
+  {
+    "sourceFileName": "19553597-7281-4321-8515-8038b9f1b5d6.jpg",
+    "role": "injection-line-wide",
+    "alt": "Wide panoramic view of injection molding equipment inside the JIAJIELI factory"
+  },
+  {
+    "sourceFileName": "85b95a7c-7c81-40ac-aca3-6b37c8d56080.jpg",
+    "role": "injection-line-detail",
+    "alt": "Injection molding line and produced mat components inside the JIAJIELI factory"
+  },
+  {
+    "sourceFileName": "71a92c8e-3946-4bb5-b453-6d0188a37593.jpg",
+    "role": "production-and-materials",
+    "alt": "Factory entrance showing production equipment and mold storage at Zhejiang Jiajie Plastic"
+  },
+  {
+    "sourceFileName": "b05c78a7-c4dd-42c6-93eb-84d2db0628e2.jpg",
+    "role": "finished-stock",
+    "alt": "Panoramic view of organized finished mat stock inside the JIAJIELI factory"
+  }
+]
