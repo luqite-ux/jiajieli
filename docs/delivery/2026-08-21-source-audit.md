@@ -66,3 +66,11 @@ Product detail, image, content, database, and production verification results wi
 - Database readback: 298 active products and 7 active categories; every row belongs to tenant `a1471a06-d1a8-4fe8-a12d-59cc6fe2b12b`.
 - Tenant readback: `admin_group=2`, `default_language=en`, `supported_languages=[en]`.
 - Products with no material explicitly present in the public title: 25; material remains unset instead of being inferred.
+
+### Production data layer
+
+- Root cause of the eight-product fallback: the old product query requested nonexistent `gallery` and `material` columns, while the old category query requested nonexistent `image_url`; both errors were swallowed and replaced with demo data.
+- Correct source fields: product gallery from `extra_data.images`, material from `specs.Material`, category image from the first active product image, and category relation from `category_slug`.
+- Demo product fallback removed; a query failure can no longer silently republish unverified launch content.
+- Locale resolution implemented as requested locale → default locale → first nonempty locale → explicit fallback.
+- Local production build passed with temporary environment injection from the approved local env source; no secrets were written to the worktree.
