@@ -28,4 +28,16 @@
 
 ## Audit results
 
-Product, image, content, database, and production verification results will be appended as each implementation task completes.
+### Alibaba catalog capture
+
+- Capture timestamp: `2026-08-21T11:51:51.734Z`
+- Advertised public product count: 342
+- Public product-list pages captured: 22 of 22
+- Unique Alibaba product IDs captured: 342
+- Duplicate Alibaba product IDs: 0
+- Exact normalized duplicate titles: 3 groups; these require business-level reconciliation rather than automatic ID deletion.
+- Source image references: 7,288 before image-size and hash deduplication.
+- Source group distribution: 121 ungrouped; 95 in `827489371`; 84 in `827470310`; 18 in `827210554`; 7 each in `827416846` and `827724478`; 5 each in `827301973` and `828986461`.
+- The capture manifest excludes price/MOQ as publishable product specifications because those values are time-sensitive commercial terms.
+
+Product detail, image, content, database, and production verification results will be appended as each implementation task completes.
