@@ -9,6 +9,7 @@ export function SectionShell({
   title,
   description,
   align = 'left',
+  headingLevel = 'h2',
   children,
 }: {
   id?: string
@@ -18,8 +19,11 @@ export function SectionShell({
   title?: React.ReactNode
   description?: React.ReactNode
   align?: 'left' | 'center'
+  headingLevel?: 'h1' | 'h2'
   children?: React.ReactNode
 }) {
+  const Heading = headingLevel
+
   return (
     <section id={id} className={cn('py-16 sm:py-20 lg:py-24', className)}>
       <Container className={containerClassName}>
@@ -32,9 +36,9 @@ export function SectionShell({
               </p>
             )}
             {title && (
-              <h2 className="text-balance font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              <Heading className="text-balance font-heading text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
                 {title}
-              </h2>
+              </Heading>
             )}
             {description && (
               <p className="mt-4 text-pretty leading-relaxed text-muted-foreground">{description}</p>

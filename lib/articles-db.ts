@@ -1,13 +1,12 @@
 import { createPublicSupabaseClient, getTenantId } from '@/lib/supabase'
-import { newsPosts as fallbackPosts, type NewsPost } from '@/lib/data/news'
+import type { NewsPost } from '@/lib/data/news'
 
 type ArticleRow = {
   slug: string
   title_i18n: Record<string, string> | null
   excerpt_i18n: Record<string, string> | null
   content_i18n: Record<string, string | string[]> | null
-  image_url: string | null
-  category: string | null
+  featured_image: string | null
   published_at: string | null
   created_at: string
 }
@@ -29,28 +28,29 @@ export async function fetchPublishedArticles(): Promise<NewsPost[]> {
     const supabase = createPublicSupabaseClient()
     const { data, error } = await supabase
       .from('articles')
-      .select('slug,title_i18n,excerpt_i18n,content_i18n,image_url,category,published_at,created_at')
+      .select('slug,title_i18n,excerpt_i18n,content_i18n,featured_image,published_at,created_at')
       .eq('tenant_id', getTenantId())
       .eq('is_published', true)
       .order('published_at', { ascending: false, nullsFirst: false })
 
-    if (error || !data?.length) return fallbackPosts
+    if (error) throw error
+    if (!data?.length) return []
 
     return (data as ArticleRow[]).map((article) => {
-      const fallback = fallbackPosts.find((post) => post.slug === article.slug)
-      const content = pick(article.content_i18n, fallback?.body ?? [])
+      const content = pick(article.content_i18n, [])
       return {
         slug: article.slug,
-        title: pick(article.title_i18n, fallback?.title ?? article.slug),
+        title: pick(article.title_i18n, article.slug),
         date: (article.published_at ?? article.created_at).slice(0, 10),
-        category: article.category ?? fallback?.category ?? 'News',
-        excerpt: pick(article.excerpt_i18n, fallback?.excerpt ?? ''),
-        image: article.image_url ?? fallback?.image ?? '/images/factory-aerial.png',
-        body: paragraphs(content, fallback?.body ?? []),
+        category: 'News',
+        excerpt: pick(article.excerpt_i18n, ''),
+        image: article.featured_image ?? '/images/factory-aerial.png',
+        body: paragraphs(content, []),
       }
     })
-  } catch {
-    return fallbackPosts
+  } catch (error) {
+    console.error('Unable to load published articles', error)
+    return []
   }
 }
 

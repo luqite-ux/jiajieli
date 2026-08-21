@@ -21,9 +21,7 @@ export function SiteFooter() {
               className="h-8 w-auto object-contain"
             />
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              {company.legalName} has manufactured PVC and TPE anti-slip mats since{' '}
-              {company.foundedYear}, exporting to buyers across {company.exportMarkets[0]},{' '}
-              {company.exportMarkets[1]}, {company.exportMarkets[2]}, and {company.exportMarkets[3]}.
+              {company.legalName} presents bath, shower, sink, anti-slip, and door mat options for B2B product sourcing.
             </p>
           </div>
 

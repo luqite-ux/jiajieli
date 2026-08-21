@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function FaqPage() {
   return (
-    <SectionShell className="bg-gradient-to-br from-[#eef9fa] via-white to-[#fff7ed]" eyebrow="FAQ" title="Common sourcing questions">
+    <SectionShell headingLevel="h1" className="bg-gradient-to-br from-[#eef9fa] via-white to-[#fff7ed]" eyebrow="FAQ" title="Common sourcing questions">
       <div className="grid gap-4">
         {faqItems.map((item) => (
           <article key={item.question} className="rounded-2xl border border-border bg-card p-6">

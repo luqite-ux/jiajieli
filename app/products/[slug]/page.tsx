@@ -58,7 +58,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
-      <SectionShell className="bg-[#eef8f9] text-[#17363d]" eyebrow={category?.name || 'Product'} title={product.name} description={product.summary}>
+      <SectionShell headingLevel="h1" className="bg-[#eef8f9] text-[#17363d]" eyebrow={category?.name || 'Product'} title={product.name} description={product.summary}>
         <div className="grid gap-10 lg:grid-cols-[.92fr_1.08fr]">
           <ProductGallery images={product.gallery} productName={product.name} />
           <div className="rounded-2xl border border-[#c5d5d8] bg-white p-6 shadow-sm sm:p-8">

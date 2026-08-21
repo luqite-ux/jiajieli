@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <SectionShell className="bg-gradient-to-br from-[#eef9fa] via-white to-[#fff7ed]" eyebrow="Contact" title="Send JIAJIELI your sourcing requirements." description="Share the product type, target quantity, market, and customization details. The export team will follow up directly." />
+      <SectionShell headingLevel="h1" className="bg-gradient-to-br from-[#eef9fa] via-white to-[#fff7ed]" eyebrow="Contact" title="Send JIAJIELI your sourcing requirements." description="Share the product type, target quantity, market, and customization details. The team will review the inquiry." />
       <SectionShell>
         <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr]">
           <aside className="rounded-2xl border border-border bg-card p-6">
