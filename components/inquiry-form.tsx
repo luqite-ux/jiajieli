@@ -19,6 +19,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { categories as defaultCategories, type ProductCategory } from '@/lib/data/products'
+import { InquiryCaptchaField } from '@/components/inquiry-captcha-field'
 
 const countries = [
   'United States',
@@ -60,15 +61,25 @@ export function InquiryForm({
 }) {
   const formId = useId()
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle')
+  const [error, setError] = useState('')
+  const [captchaRefreshKey, setCaptchaRefreshKey] = useState(0)
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setStatus('submitting')
+    setError('')
     const response = await fetch('/api/inquiries', {
       method: 'POST',
       body: new FormData(event.currentTarget),
     })
-    setStatus(response.ok ? 'success' : 'idle')
+    if (response.ok) {
+      setStatus('success')
+      return
+    }
+    const body = await response.json().catch(() => ({ error: 'Unable to submit your inquiry. Please try again.' }))
+    setError(body.error || 'Unable to submit your inquiry. Please try again.')
+    setCaptchaRefreshKey((key) => key + 1)
+    setStatus('idle')
   }
 
   if (status === 'success') {
@@ -202,6 +213,9 @@ export function InquiryForm({
           />
         </Field>
 
+        <InquiryCaptchaField refreshKey={captchaRefreshKey} />
+
+        {error ? <FieldDescription role="alert" className="text-red-700">{error}</FieldDescription> : null}
         <Button type="submit" size="lg" className="rounded-full" disabled={status === 'submitting'}>
           {status === 'submitting' ? (
             <>

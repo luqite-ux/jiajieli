@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { createPublicSupabaseClient, getTenantId } from '@/lib/supabase'
+import { verifyCaptcha } from '@/lib/inquiry-captcha'
 
 async function notifyInquiryEmail(tenantId: string, inquiryId: string) {
   const secret = process.env.INQUIRY_NOTIFY_SECRET?.trim()
@@ -27,6 +28,18 @@ export async function POST(request: Request) {
   const productSlug = String(form.get('productSlug') || '')
   const productName = String(form.get('productName') || '')
   const productInterest = String(form.get('productInterest') || 'General')
+  const captchaSecret = process.env.CAPTCHA_SECRET?.trim()
+  if (!captchaSecret) {
+    return NextResponse.json({ error: 'Verification service is temporarily unavailable.' }, { status: 503 })
+  }
+  const captcha = verifyCaptcha({
+    secret: captchaSecret,
+    token: String(form.get('captchaToken') || ''),
+    answer: String(form.get('captchaAnswer') || ''),
+  })
+  if (!captcha.ok) {
+    return NextResponse.json({ error: 'The verification code is incorrect or expired. Please try again.' }, { status: 400 })
+  }
   const payload = {
     tenant_id: getTenantId(),
     name: String(form.get('name') || ''),
