@@ -4,6 +4,8 @@ import { describe, it } from 'node:test'
 
 import { createCaptcha, verifyCaptcha } from '../lib/inquiry-captcha.ts'
 
+Reflect.set(process.env, 'NODE_ENV', 'test')
+
 const secret = 'jiajieli-test-secret-with-at-least-32-characters'
 
 describe('JIAJIELI inquiry CAPTCHA', () => {

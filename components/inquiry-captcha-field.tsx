@@ -7,6 +7,14 @@ import { Field, FieldLabel, FieldDescription } from '@/components/ui/field'
 
 type Challenge = { svg: string; token: string }
 
+async function loadChallenge() {
+  const response = await fetch('/api/captcha', { cache: 'no-store' })
+  if (!response.ok) throw new Error('unavailable')
+  const body = (await response.json()) as Challenge
+  if (!body.svg || !body.token) throw new Error('invalid')
+  return body
+}
+
 export function InquiryCaptchaField({ refreshKey = 0 }: { refreshKey?: number }) {
   const [challenge, setChallenge] = useState<Challenge | null>(null)
   const [error, setError] = useState('')
@@ -17,11 +25,7 @@ export function InquiryCaptchaField({ refreshKey = 0 }: { refreshKey?: number })
     setChallenge(null)
     setError('')
     try {
-      const response = await fetch('/api/captcha', { cache: 'no-store' })
-      if (!response.ok) throw new Error('unavailable')
-      const body = (await response.json()) as Challenge
-      if (!body.svg || !body.token) throw new Error('invalid')
-      setChallenge(body)
+      setChallenge(await loadChallenge())
     } catch {
       setError('Verification code failed to load. Please try another code.')
     } finally {
@@ -29,7 +33,14 @@ export function InquiryCaptchaField({ refreshKey = 0 }: { refreshKey?: number })
     }
   }, [])
 
-  useEffect(() => { void refresh() }, [refresh, refreshKey])
+  useEffect(() => {
+    let active = true
+    loadChallenge()
+      .then((body) => { if (active) setChallenge(body) })
+      .catch(() => { if (active) setError('Verification code failed to load. Please try another code.') })
+      .finally(() => { if (active) setLoading(false) })
+    return () => { active = false }
+  }, [refreshKey])
 
   return (
     <Field>
