@@ -1,0 +1,32 @@
+[
+  {
+    "id": "product-bathroom",
+    "localPath": "public/images/hero/product-bathroom.webp",
+    "r2Key": "tenants/jiajieli/hero/product-bathroom.webp",
+    "subject": "Bright bathroom product application",
+    "source": "Built-in image generation using the customer product image as the product reference",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "536ed5a61b0ecd645be34c19b3fcb9ca7291156f4581c68e3ce229e7d2aafb42"
+  },
+  {
+    "id": "factory-line",
+    "localPath": "public/images/hero/factory-line.webp",
+    "r2Key": "tenants/jiajieli/hero/factory-line.webp",
+    "subject": "Bright customer factory production line",
+    "source": "Built-in image edit using customer-supplied injection-line-wide factory photo",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "bb83a601acfd6035198aeb1325dfd5832ada545789254f12bea9788d8d126586"
+  },
+  {
+    "id": "production-equipment",
+    "localPath": "public/images/hero/production-equipment.webp",
+    "r2Key": "tenants/jiajieli/hero/production-equipment.webp",
+    "subject": "Orderly injection molding production equipment",
+    "source": "Built-in image edit using customer-supplied injection-line-detail factory photo",
+    "width": 1920,
+    "height": 1080,
+    "sha256": "f151eba4cf71b3cbd2bd85414e0242bd7ba4bf1e0ff29f41befbdd9969426a23"
+  }
+]
