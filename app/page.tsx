@@ -12,6 +12,8 @@ import { factoryImages, oemSteps } from '@/lib/factory-content'
 import { fetchPublishedArticles } from '@/lib/articles-db'
 import { fetchProductCategories, fetchProducts } from '@/lib/products-db'
 import { canonicalPath } from '@/lib/seo'
+import { HeroCarousel } from '@/components/home/hero-carousel'
+import { heroSlides } from '@/lib/hero-slides'
 
 export const revalidate = 60
 export const metadata: Metadata = {
@@ -24,17 +26,7 @@ export default async function HomePage() {
   const [categories, products, newsPosts] = await Promise.all([fetchProductCategories(), fetchProducts(), fetchPublishedArticles()])
   return (
     <>
-      <section className="relative overflow-hidden bg-[radial-gradient(circle_at_20%_20%,rgba(126,190,199,.32),transparent_28%),linear-gradient(135deg,#f8fcfb_0%,#eaf6f7_45%,#fff7ed_100%)]">
-        <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-6xl items-center gap-12 px-5 py-16 sm:px-6 lg:grid-cols-[1.02fr_.98fr] lg:px-8">
-          <Reveal>
-            <p className="mb-4 inline-flex rounded-full border border-primary/20 bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[.18em] text-primary">Bath & household mat sourcing</p>
-            <h1 className="text-balance font-heading text-5xl font-semibold tracking-tight text-foreground sm:text-6xl lg:text-7xl">Mat Collections for Bathrooms, Sinks, Entryways & Custom Programs</h1>
-            <p className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground">Browse JIAJIELI product images and specifications, then send the selected item, quantity, color, size, and packaging requirements for project review.</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row"><Button asChild size="lg" className="rounded-full"><Link href="/products">Explore Products <ArrowRight className="size-4" /></Link></Button><Button asChild size="lg" variant="outline" className="rounded-full bg-white/80"><Link href="/contact">Request a Quote</Link></Button></div>
-          </Reveal>
-          <Reveal delay={120} className="relative overflow-hidden rounded-[1.6rem] border border-white/80 bg-white/70 p-3 shadow-2xl"><Image src={factoryImages.finishedStock} alt="Finished mat products at the JIAJIELI facility" width={1000} height={760} priority className="aspect-[4/3] rounded-[1.2rem] object-cover" /></Reveal>
-        </div>
-      </section>
+      <HeroCarousel slides={heroSlides} />
 
       <SectionShell className="bg-secondary/50" eyebrow="Product Range" title="Find the right mat category faster.">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{categories.slice(0, 6).map((category, index) => <Reveal key={category.slug} delay={index * 50} className="group overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:-translate-y-1 hover:shadow-lg"><Link href={`/products?category=${category.slug}`} className="block"><Image src={category.image} alt={category.name} width={520} height={360} className="aspect-[4/3] w-full object-cover" /><div className="p-5"><h2 className="font-heading text-xl font-semibold text-card-foreground">{category.name}</h2><p className="mt-2 text-sm leading-6 text-muted-foreground">{category.description}</p></div></Link></Reveal>)}</div>
