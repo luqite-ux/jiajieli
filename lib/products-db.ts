@@ -37,22 +37,36 @@ function normalizeSpecs(specs: ProductRow['specs']): Product['specs'] {
     .map(([label, value]) => ({ label, value: String(value) }))
 }
 
+function sanitizeProductClaim(value: string) {
+  return value
+    .replace(/\bTUV\s+Certified\b/gi, '')
+    .replace(/\bCertified\b/gi, '')
+    .replace(/\b(?:cheap|workable|competitive|best)\s+price\b/gi, '')
+    .replace(/\bprice\b/gi, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim()
+}
+
+function sanitizeProductList(values: string[]) {
+  return values.map(sanitizeProductClaim).filter(Boolean)
+}
+
 function mapProduct(row: ProductRow, locale: string, defaultLocale: string): Product {
   const specs = normalizeSpecs(row.specs)
   const image = row.image_url ?? row.extra_data?.images?.[0] ?? ''
-  const description = pickLocalized(row.description_i18n, locale, defaultLocale, '')
+  const description = sanitizeProductClaim(pickLocalized(row.description_i18n, locale, defaultLocale, ''))
   return {
     slug: row.slug,
-    name: pickLocalized(row.name_i18n, locale, defaultLocale, row.slug),
+    name: sanitizeProductClaim(pickLocalized(row.name_i18n, locale, defaultLocale, row.slug)),
     categorySlug: row.category_slug ?? '',
     material: specs.find((spec) => spec.label.toLowerCase() === 'material')?.value ?? '',
     image,
     gallery: row.extra_data?.images?.length ? row.extra_data.images : image ? [image] : [],
-    features: pickLocalized(row.features_i18n, locale, defaultLocale, []),
-    applications: pickLocalized(row.applications_i18n, locale, defaultLocale, []),
-    advantages: pickLocalized(row.advantages_i18n, locale, defaultLocale, []),
+    features: sanitizeProductList(pickLocalized(row.features_i18n, locale, defaultLocale, [])),
+    applications: sanitizeProductList(pickLocalized(row.applications_i18n, locale, defaultLocale, [])),
+    advantages: sanitizeProductList(pickLocalized(row.advantages_i18n, locale, defaultLocale, [])),
     specs,
-    summary: pickLocalized(row.overview_i18n, locale, defaultLocale, description),
+    summary: sanitizeProductClaim(pickLocalized(row.overview_i18n, locale, defaultLocale, description)),
     longDescription: description,
     sourceUrls: row.extra_data?.source_urls ?? [],
   }

@@ -8,13 +8,14 @@ import { categories } from '@/lib/data/products'
 import { mainNav } from '@/lib/data/nav'
 
 export function SiteFooter() {
+  const legalName = company.legalName.replace(/[\s.]+$/, '')
   return (
     <footer className="border-t border-border/70 bg-secondary/40">
       <Container className="py-14 sm:py-16">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             <Image
-              src="/images/logo.png"
+              src="/images/logo-tight.png"
               alt="JIAJIELI logo"
               width={220}
               height={60}
@@ -88,7 +89,7 @@ export function SiteFooter() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-border/70 pt-6 text-xs text-muted-foreground sm:flex-row">
           <p>
-            &copy; {new Date().getFullYear()} {company.legalName}. All rights reserved.
+            &copy; {new Date().getFullYear()} {legalName}. All rights reserved.
           </p>
           <p>B2B inquiries only &middot; No online sales</p>
         </div>

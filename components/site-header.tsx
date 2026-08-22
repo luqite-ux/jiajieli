@@ -26,7 +26,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2" aria-label="JIAJIELI home">
           <Image
-            src="/images/logo.png"
+            src="/images/logo-tight.png"
             alt="JIAJIELI logo"
             width={200}
             height={54}
@@ -69,7 +69,7 @@ export function SiteHeader() {
             <SheetHeader>
               <SheetTitle>
                 <Image
-                  src="/images/logo.png"
+                  src="/images/logo-tight.png"
                   alt="JIAJIELI logo"
                   width={130}
                   height={36}

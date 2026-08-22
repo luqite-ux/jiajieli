@@ -20,6 +20,7 @@ test('uses a bright branded shell with readable official logos', async () => {
   assert.match(header, /h-10/)
   assert.match(header, /sm:h-11/)
   assert.match(header, /w-auto object-contain/)
+  assert.match(header, /\/images\/logo-tight\.png/)
   assert.match(footer, /h-10/)
   assert.match(footer, /sm:h-12/)
   assert.match(footer, /w-auto object-contain/)

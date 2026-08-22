@@ -23,11 +23,11 @@ export const metadata: Metadata = {
     description:
       'Zhejiang Jiajie Plastic Co., Ltd. manufactures PVC and TPE anti-slip bath mats, floor mats, door mats, and custom OEM/ODM mat solutions for global B2B buyers.',
     type: 'website',
-    images: ['/images/logo.png'],
+    images: ['/images/logo-tight.png'],
   },
   icons: {
-    icon: [{ url: '/images/logo.png', type: 'image/png' }],
-    apple: '/images/logo.png',
+    icon: [{ url: '/images/logo-tight.png', type: 'image/png' }],
+    apple: '/images/logo-tight.png',
   },
 }
 
