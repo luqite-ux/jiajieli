@@ -37,12 +37,25 @@
   --sidebar-accent-foreground: oklch(0.32 0.045 233);
   --sidebar-border: oklch(0.9 0.02 210);
   --sidebar-ring: oklch(0.62 0.06 210);
+  --brand-aqua: oklch(0.87 0.05 195);
+  --brand-teal: oklch(0.5 0.1 200);
+  --brand-teal-deep: oklch(0.32 0.07 220);
+  --brand-coral: oklch(0.72 0.15 42);
+  --brand-warm-white: oklch(0.99 0.006 95);
+  --motion-fast: 180ms;
+  --motion-standard: 600ms;
+  --motion-hero: 6000ms;
 }
 
 @theme inline {
   --font-sans: 'Geist', 'Geist Fallback';
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
   --font-heading: 'Space Grotesk', 'Geist Fallback';
+  --color-brand-aqua: var(--brand-aqua);
+  --color-brand-teal: var(--brand-teal);
+  --color-brand-teal-deep: var(--brand-teal-deep);
+  --color-brand-coral: var(--brand-coral);
+  --color-brand-warm-white: var(--brand-warm-white);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -87,6 +100,28 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  :focus-visible {
+    outline: 2px solid var(--brand-teal);
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .water-texture {
+    background-image:
+      radial-gradient(circle at 15% 20%, color-mix(in oklch, var(--brand-aqua) 35%, transparent) 0%, transparent 45%),
+      radial-gradient(circle at 85% 10%, color-mix(in oklch, var(--brand-teal) 18%, transparent) 0%, transparent 50%),
+      radial-gradient(circle at 60% 80%, color-mix(in oklch, var(--brand-coral) 10%, transparent) 0%, transparent 40%);
+  }
+
+  .hero-overlay {
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--brand-teal-deep) 82%, transparent) 0%,
+      color-mix(in oklch, var(--brand-teal-deep) 44%, transparent) 42%,
+      color-mix(in oklch, var(--brand-teal-deep) 8%, transparent) 75%
+    );
   }
 }
 
@@ -137,4 +172,15 @@
 
 .text-balance {
   text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

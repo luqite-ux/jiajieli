@@ -23,15 +23,15 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/70 bg-background/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-5 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-20 w-full max-w-7xl items-center justify-between px-5 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-2" aria-label="JIAJIELI home">
           <Image
             src="/images/logo.png"
             alt="JIAJIELI logo"
-            width={140}
-            height={40}
+            width={200}
+            height={54}
             priority
-            className="h-7 w-auto object-contain sm:h-8"
+            className="h-10 w-auto object-contain sm:h-11"
           />
         </Link>
 
@@ -73,7 +73,7 @@ export function SiteHeader() {
                   alt="JIAJIELI logo"
                   width={130}
                   height={36}
-                  className="h-7 w-auto object-contain"
+                  className="h-9 w-auto object-contain"
                 />
               </SheetTitle>
             </SheetHeader>
