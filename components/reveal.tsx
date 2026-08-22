@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { createRevealMotionStyle } from '@/lib/motion'
 
 export function Reveal({
   children,
@@ -14,10 +15,10 @@ export function Reveal({
   return (
     <Tag
       className={cn(
-        'animate-in fade-in slide-in-from-bottom-3 duration-700 ease-out',
+        'reveal-on-scroll',
         className,
       )}
-      style={{ animationDelay: `${delay}ms`, animationFillMode: 'both' }}
+      style={createRevealMotionStyle(delay) as React.CSSProperties}
     >
       {children}
     </Tag>

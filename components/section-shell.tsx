@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import { Container } from '@/components/container'
+import { Reveal } from '@/components/reveal'
 
 export function SectionShell({
   id,
@@ -30,7 +31,7 @@ export function SectionShell({
     <section id={id} className={cn('relative overflow-hidden py-16 sm:py-20 lg:py-24', tone === 'dark' ? 'text-white' : 'text-foreground', className)}>
       <Container className={containerClassName}>
         {(eyebrow || title || description) && (
-          <div className={cn('mb-10 sm:mb-14', align === 'center' && 'text-center mx-auto max-w-2xl')}>
+          <Reveal className={cn('mb-10 sm:mb-14', align === 'center' && 'text-center mx-auto max-w-2xl')}>
             {eyebrow && (
               <p className={cn('mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em]', tone === 'dark' ? 'text-brand-aqua' : 'text-brand-teal')}>
                 <span className="h-1.5 w-1.5 rounded-full bg-accent" />
@@ -45,7 +46,7 @@ export function SectionShell({
             {description && (
               <p className={cn('mt-4 max-w-2xl text-pretty leading-relaxed', tone === 'dark' ? 'text-white/75' : 'text-muted-foreground')}>{description}</p>
             )}
-          </div>
+          </Reveal>
         )}
         {children}
       </Container>

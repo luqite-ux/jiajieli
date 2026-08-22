@@ -72,23 +72,23 @@ export function HeroCarousel({ slides }: { slides: readonly HeroSlide[] }) {
               fill
               priority={slideIndex === 0}
               sizes="100vw"
-              className={cn('object-cover', slideIndex === index && !reducedMotion && 'scale-[1.035] transition-transform duration-[6000ms]')}
+              className={cn('object-cover', slideIndex === index && !reducedMotion && 'hero-media-active')}
             />
             <div className="hero-overlay pointer-events-none absolute inset-0" />
           </div>
         ))}
 
         <div className="relative z-10 mx-auto flex h-full max-w-7xl items-end px-5 pb-24 sm:px-6 sm:pb-28 lg:px-8">
-          <div key={active.id} className="max-w-2xl animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div key={active.id} className="hero-copy max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-aqua">{active.eyebrow}</p>
             <h1 className="mt-4 text-balance font-heading text-4xl font-semibold leading-[1.04] tracking-tight text-white sm:text-6xl lg:text-7xl">{active.heading}</h1>
             <p className="mt-5 max-w-xl text-base leading-7 text-white/85 sm:text-lg">{active.description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg" className="rounded-full bg-white text-brand-teal-deep hover:bg-brand-warm-white">
-                <Link href={active.ctaHref}>{active.ctaLabel}<ArrowRight aria-hidden="true" /></Link>
+                <Link href={active.ctaHref} className="motion-link">{active.ctaLabel}<ArrowRight aria-hidden="true" /></Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="rounded-full border-white/55 bg-white/10 text-white hover:bg-white/20 hover:text-white">
-                <Link href="/contact">Request a Quote</Link>
+                <Link href="/contact" className="motion-link">Request a Quote</Link>
               </Button>
             </div>
           </div>

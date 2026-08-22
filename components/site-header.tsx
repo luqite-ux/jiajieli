@@ -42,8 +42,9 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
+                data-active={isActive ? 'true' : 'false'}
                 className={cn(
-                  'rounded-full px-3.5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground',
+                  'nav-motion rounded-full px-3.5 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground',
                   isActive && 'bg-secondary text-foreground',
                 )}
               >
@@ -55,7 +56,7 @@ export function SiteHeader() {
 
         <div className="hidden lg:block">
           <Button asChild className="rounded-full">
-            <Link href="/contact">Request a Quote</Link>
+            <Link href="/contact" className="motion-link">Request a Quote</Link>
           </Button>
         </div>
 
