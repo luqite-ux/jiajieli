@@ -29,7 +29,7 @@ export default function ManufacturingPage() {
       <SectionShell className="bg-white" eyebrow="Factory Tour" title="Production evidence, not stock imagery">
         <div className="grid gap-6 md:grid-cols-2">{scenes.map(([image, alt, title, description]) => <article key={title} className="overflow-hidden rounded-2xl border border-[#c5d5d8] bg-white shadow-sm"><Image src={image} alt={alt} width={1200} height={800} className="aspect-[4/3] w-full object-cover" /><div className="p-6"><h2 className="font-heading text-2xl font-semibold">{title}</h2><p className="mt-3 text-sm leading-7 text-[#536b70]">{description}</p></div></article>)}</div>
       </SectionShell>
-      <SectionShell className="bg-[#17363d] text-white" eyebrow="Order Alignment" title="Confirm the production scope for the selected product" description="Material, dimensions, colors, patterns, packaging, inspection points, and shipment arrangements are handled as order-specific requirements.">
+      <SectionShell tone="dark" className="bg-[#17363d]" eyebrow="Order Alignment" title="Confirm the production scope for the selected product" description="Material, dimensions, colors, patterns, packaging, inspection points, and shipment arrangements are handled as order-specific requirements.">
         <div className="flex flex-col gap-3 sm:flex-row"><Button asChild size="lg" className="rounded-full bg-white text-[#17363d] hover:bg-[#e8f2f3]"><Link href="/oem-odm">View OEM/ODM Process <ArrowRight className="size-4" /></Link></Button><Button asChild size="lg" variant="outline" className="rounded-full border-white bg-transparent text-white hover:bg-white/10"><Link href="/contact">Send an Inquiry</Link></Button></div>
       </SectionShell>
     </main>
