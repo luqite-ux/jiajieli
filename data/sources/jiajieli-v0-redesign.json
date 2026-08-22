@@ -7,5 +7,8 @@
   "downloadedArchive": ".tmp/v0-jiajieli-redesign/jiajieli-v0-redesign.zip",
   "extractedDirectory": ".tmp/v0-jiajieli-redesign/source",
   "attachments": [],
-  "generatedAt": "2026-08-22T04:50:36.495Z"
+  "generatedAt": "2026-08-22T04:50:36.495Z",
+  "deletedAt": "2026-08-22T05:19:48.507Z",
+  "deleteAllChats": true,
+  "deletionVerified": true
 }
